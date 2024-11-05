@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    <div class="my-div">
+       我是div
+    </div>
+</body>
+</html>
+<script>
+  let divEl = document.querySelector('.my-div')
+  let attr = document.createAttribute("data-name")
+  attr.value = 'zhangfei'
+  divEl.setAttributeNode(attr)
+</script>
