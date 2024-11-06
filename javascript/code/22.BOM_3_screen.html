@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>获取 Screen 对象的信息</title>
+</head>
+<body>
+
+    <h3>Screen 对象信息</h3>
+    <button onclick="printScreenInfo()">打印 Screen 对象信息</button>
+    <p id="screenInfo"></p>
+
+    <script>
+        function printScreenInfo() {
+            // 获取 screen 对象的属性信息
+            const width = screen.width;
+            const height = screen.height;
+            const availWidth = screen.availWidth;
+            const availHeight = screen.availHeight;
+            const colorDepth = screen.colorDepth;
+            const pixelDepth = screen.pixelDepth;
+
+            // 将信息显示在页面上
+            document.getElementById("screenInfo").textContent = 
+                `屏幕宽度: ${width}px, 屏幕高度: ${height}px\n` +
+                `可用宽度: ${availWidth}px, 可用高度: ${availHeight}px\n` +
+                `颜色深度: ${colorDepth}位, 像素深度: ${pixelDepth}位`;
+        }
+    </script>
+
+</body>
+</html>

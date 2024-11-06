@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试 History 对象</title>
+</head>
+<body>
+
+    <h3>History 对象示例</h3>
+    <button onclick="goBack()">后退</button>
+    <button onclick="goForward()">前进</button>
+    <button onclick="reloadPage()">刷新</button>
+    <button onclick="addHistoryEntry()">添加历史记录</button>
+
+    <p id="historyLength">历史记录条目数量: </p>
+
+    <script>
+        // 显示历史记录的长度
+        document.getElementById('historyLength').textContent = "历史记录条目数量: " + history.length;
+
+        // 后退一页
+        function goBack() {
+            history.back();
+        }
+
+        // 前进一页
+        function goForward() {
+            history.forward();
+        }
+
+        // 重新加载当前页面
+        function reloadPage() {
+            history.go(0);
+        }
+
+        // 添加一个新的历史记录条目
+        function addHistoryEntry() {
+            history.pushState({page: 1}, "title 1", "?page=1");
+            alert("新的历史记录条目已添加，URL变为: " + location.href);
+        }
+    </script>
+
+</body>
+</html>

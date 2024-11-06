@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    <h1>window的方法测试!</h1>
+    <button onclick="window.open('https://www.bilibili.com', '_blank')">open</button>
+    <button onclick="window.close()">close</button>
+    <button onclick="showWindowSize()">显示窗口尺寸</button>
+    <button onclick="window.resizeTo(100,100)">resizeTo</button>
+    <button onclick="window.resizeBy(100,100)">resizeBy</button>
+
+
+
+</body>
+</html>
+
+<script>
+  const showWindowSize = () => {
+    alert(`窗口尺寸：${window.innerWidth} * ${window.innerHeight}`)
+  }
+</script>
