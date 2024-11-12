@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+
+<script>
+  function coloring() {
+    let r = Math.floor(Math.random() * 255);
+    let g = Math.floor(Math.random() * 255);
+    let b = Math.floor(Math.random() * 255);
+    document.body.style.backgroundColor = `rgb(${r},${g},${b})`;
+    console.log(this);
+  }
+
+  function throttled(func, delay) {
+    let timer;
+    return function (...args) {
+      //如果没有定时器，才新开一个
+      if (!timer) {
+        timer = setTimeout(() => {
+          func.apply(this, args);
+          timer = null;
+        }, delay);
+      }
+    };
+  }
+
+  window.addEventListener("resize", throttled(coloring, 1000));
+</script>

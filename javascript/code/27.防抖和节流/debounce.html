@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button class="btn">点击打印剁手</button>
+  </body>
+</html>
+
+<script>
+  const btn = document.querySelector(".btn");
+
+  function pay() {
+    console.log("剁手");
+    console.log(this);
+  }
+
+  //防抖函数
+  function debounce(func, delay) {
+    //定时器要定义在外面，这样多个定时器共用一个变量
+    let timer;
+    // 拿到事件触发时传递的参数
+    return function (...args) {
+      //清除前面的定时器
+      if (timer) {
+        clearTimeout(timer);
+      }
+      //这里定时器里要用箭头函数，否则this指向的是window
+      timer = setTimeout(() => {
+        func.apply(this, args);
+      }, delay);
+    };
+  }
+
+  btn.addEventListener("click", debounce(pay, 1000));
+</script>
