@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>下拉刷新</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      #refresh-container {
+        width: 100%;
+        height: 100vh;
+        overflow-y: scroll;
+        position: relative;
+      }
+
+      #refresh-bar {
+        width: 100%;
+        height: 50px;
+        background-color: #ddd;
+        position: absolute;
+        top: -50px;
+        text-align: center;
+        line-height: 50px;
+        font-size: 18px;
+        transition: top 0.3s; /* top变化时，平滑改变 */
+      }
+    </style>
+  </head>
+  <body>
+    <div id="refresh-container">
+      <div id="refresh-bar">下拉刷新</div>
+      <div id="content">
+        <!-- 模拟内容 -->
+        <div>内容1</div>
+        <div>内容2</div>
+        <div>内容3</div>
+        <div>内容4</div>
+        <div>内容5</div>
+      </div>
+    </div>
+
+    <script>
+      const container = document.querySelector("#refresh-container");
+      const refreshBar = document.querySelector("#refresh-bar");
+
+      //记录开始下拉的位置
+      let startY = 0;
+      //当前下拉距离
+      let currentPullDistance = 0;
+
+      //刚触碰屏幕
+      container.addEventListener("touchstart", (e) => {
+        startY = e.touches[0].pageY;
+        currentPullDistance = 0;
+      });
+
+      //在屏幕上移动
+      container.addEventListener("touchmove", (e) => {
+        //计算下拉距离
+        currentPullDistance = e.touches[0].pageY - startY;
+        //下拉中
+        if (currentPullDistance > 0) {
+          if (currentPullDistance <= 50) {
+            refreshBar.style.top = `${-50 + currentPullDistance}px`;
+            refreshBar.innerText = "下拉刷新";
+          } else {
+            refreshBar.style.top = `0px`;
+            refreshBar.innerText = "释放刷新";
+          }
+        }
+      });
+
+      //松开屏幕
+      container.addEventListener("touchend", () => {
+        if (currentPullDistance > 50) {
+          //刷新操作
+          refresh();
+        } else {
+          // 恢复到原始位置
+          refreshBar.style.top = "-50px";
+          refreshBar.innerText = "下拉刷新";
+        }
+      });
+
+      //刷新
+      function refresh() {
+        //刷新操作
+        isRefreshing = true;
+        refreshBar.innerText = "正在刷新...";
+        console.log("开始刷新");
+
+        setTimeout(() => {
+          refreshBar.innerText = "刷新完成";
+          setTimeout(() => {
+            refreshBar.style.top = "-50px";
+          }, 500);
+        }, 2000);
+      }
+    </script>
+  </body>
+</html>
