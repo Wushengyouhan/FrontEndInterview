@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>上拉加载示例</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        overflow-y: auto;
+      }
+
+      .item {
+        padding: 15px;
+        margin: 10px 0;
+        background-color: #f4f4f4;
+        border: 1px solid #ddd;
+      }
+
+      .loading {
+        text-align: center;
+        padding: 15px;
+        font-size: 14px;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container"></div>
+    <div class="loading">加载中...</div>
+
+    <script>
+      //获取dom
+      const container = document.querySelector(".container");
+      const loading = document.querySelector(".loading");
+
+      //模拟加载数据
+      let itemCount = 0;
+      function loadData() {
+        for (let i = 0; i < 10; i++) {
+          const item = document.createElement("div");
+          item.innerText = `数据项 ${itemCount + 1}`;
+          item.classList.add("item");
+          container.appendChild(item);
+          itemCount++;
+        }
+      }
+      //监听是否在加载
+      let isLoading = false;
+
+      //监听滚动事件
+      window.addEventListener("scroll", () => {
+        //当前浏览器高度
+        let clientHeight = document.documentElement.clientHeight;
+        //滚动距离
+        let scrollTop = document.documentElement.scrollTop;
+        //页面总高度
+        let scrollHeight = document.documentElement.scrollHeight;
+
+        //判断是否快滚动到底部
+        // 留50px的缓冲距离
+        if (clientHeight + scrollTop >= scrollHeight - 50) {
+          if (!isLoading) {
+            loadMoreData();
+          }
+        }
+      });
+
+      function loadMoreData() {
+        loading.classList.add("active");
+        loading.style.display = "block";
+        isLoading = true;
+        setTimeout(() => {
+          loadData();
+          isLoading = false;
+          loading.classList.remove("active");
+          loading.style.display = "none";
+        }, 1500);
+      }
+
+      //初次加载
+      loadData();
+    </script>
+  </body>
+</html>
