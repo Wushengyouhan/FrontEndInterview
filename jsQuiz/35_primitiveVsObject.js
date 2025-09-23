@@ -1,0 +1,6 @@
+console.log(Boolean(0))
+console.log(Boolean(new Number(0)))
+console.log(Boolean(''))
+console.log(Boolean(' '))
+console.log(Boolean(new Boolean(false)))
+console.log(Boolean(undefined))
