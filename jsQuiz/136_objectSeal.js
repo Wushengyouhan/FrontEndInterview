@@ -1,0 +1,6 @@
+const person = { name: "Lydia Hallie" };
+
+Object.seal(person);
+
+person.name = "Evan Bacon"
+console.log(person);
